@@ -10,17 +10,20 @@ if __name__ == '__main__':
     driver = uc.Chrome(options=options)
     driver.maximize_window()
 
+    h = Helper()
+
     # Water Bill Automation ======================================================
-    check_water_bill_prices(driver)
+    h.check_water_bill_prices(driver)
 
     # Electric Bill Automation ===================================================
-    check_electric_bill_prices(driver)
+    h.check_electric_bill_prices(driver)
 
     # Internet Bill Automation ===================================================
-    check_internet_bill_prices(driver)
+    h.check_internet_bill_prices(driver)
 
-    send_message()
+    h.send_message()
 
     # Exit program
     driver.close()
     driver.quit()
+    quit()
