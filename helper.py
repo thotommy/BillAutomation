@@ -22,8 +22,7 @@ class Helper:
     # Water Bill Helpers
 
     def check_accountExists_And_Requires_Payment(self, driver):
-        acct = driver.find_element(By.XPATH,
-                                   "/html/body/div[2]/div[2]/div[3]/div/div[2]/div/div/table/tbody/tr/td[1]").text
+        acct = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[3]/div/div[2]/div/div/table/tbody/tr/td[1]").text
         self.__water_bill = driver.find_element(By.XPATH,
                                                 "/html/body/div[2]/div[2]/div[3]/div/div[2]/div/div/table/tbody/tr/td[4]").text
         if (acct == config('SHORT_VERS_ADDR') and self.__water_bill != "0.00"):
@@ -32,9 +31,7 @@ class Helper:
                 f'On {today}, water bill price is ${self.__water_bill}')
         else:
             print(f'No water bill. Price is ${self.__water_bill}')
-            driver.close()
-            driver.quit()
-            quit()
+            self._close_driver(driver)
 
     def check_water_bill_prices(self, driver):
         print("Checking the water bill...")
@@ -98,9 +95,7 @@ class Helper:
             print(f'On {today}, electric bill price is {self.__electric_bill}')
         else:
             print(f'No power bill. Price is {self.__electric_bill}')
-            driver.close()
-            driver.quit()
-            quit()
+            self._close_driver(driver)
 
     # Internet Bill Helpers
 
@@ -137,9 +132,7 @@ class Helper:
             print(f'On {today}, internet bill price is ${self.__internet_bill}')
         else:
             print(f'No internet bill. Price is ${self.__internet_bill}')
-            driver.close()
-            driver.quit()
-            quit()
+            self._close_driver(driver)
 
     # Twilio calls
 
@@ -175,3 +168,9 @@ class Helper:
         except NoSuchElementException:
             return False
         return True
+
+    def _close_driver(self, driver):
+        print("Closing driver...")
+        # driver.close()
+        # driver.quit()
+        # quit()
