@@ -52,16 +52,18 @@ class Helper:
         print("Paying the Water Bill...")
         driver.find_element(
             By.XPATH, "/html/body/div[2]/div[2]/div[3]/div/div[2]/div/div/table/tbody/tr/td[5]/a").click()
+            
+        self.exists_by_id(driver, "ccnumfield", 4.4)
 
-        self.exists_by_id(driver, "txtCardNumber", 2.4)
-
-        driver.find_element(By.ID, "txtCardNumber").send_keys(
+        driver.find_element(By.ID, "ccnumfield").send_keys(
             config('CARD_NUMBER'))
+        driver.find_element(By.ID, "ccexpirymonth").send_keys(
+            config('CARD_EXP_DATE_MONTH'))
+        driver.find_element(By.ID, "ccexpiryyear").send_keys(
+            config('CARD_EXP_DATE_YEAR'))
+        driver.find_element(By.ID, "cccvvfield").send_keys(config('CARD_CID'))
         driver.find_element(By.ID, "txtNameOnCard").send_keys(
             config('PERSON_NAME'))
-        driver.find_element(By.ID, "txtCvvCid").send_keys(config('CARD_CID'))
-        driver.find_element(By.ID, "txtExpires").send_keys(
-            config('CARD_EXP_DATE'))
         driver.find_element(By.ID, "txtAddress").send_keys(
             config('SHORT_VERS_ADDR'))
         driver.find_element(By.ID, "txtCity").send_keys(config('ADDR_CITY'))
@@ -70,7 +72,8 @@ class Helper:
         driver.find_element(By.ID, "txtZipPostal").send_keys(
             config('ADDR_ZIP'))
         driver.find_element(By.ID, "emlEmail").send_keys(config('USER_NAME'))
-
+        time.sleep(2.4)
+        driver.find_element(By.ID, "btnContinuePaymentCsi").click()
     # Eletric Bill Helpers
 
     def check_electric_bill_prices(self, driver):
@@ -96,6 +99,9 @@ class Helper:
         else:
             print(f'No power bill. Price is {self.__electric_bill}')
             self._close_driver(driver)
+
+    def pay_electric_bill(self, driver):
+        print("Paying the Electric Bill...")
 
     # Internet Bill Helpers
 
@@ -133,6 +139,9 @@ class Helper:
         else:
             print(f'No internet bill. Price is ${self.__internet_bill}')
             self._close_driver(driver)
+
+    def pay_internet_bill(self, driver):
+        print("Paying the Internet Bill...")
 
     # Twilio calls
 
