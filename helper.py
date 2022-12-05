@@ -118,6 +118,45 @@ class Helper:
 
     def pay_electric_bill(self, driver):
         print("Paying the Electric Bill...")
+        self.exists_by_xpath(
+            driver, "/html/body/div[3]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[2]/button[1]", 6.3)
+        driver.find_element(
+            By.XPATH, "/html/body/div[3]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[2]/button[1]").click()
+        self.exists_by_xpath(
+            driver, "/html/body/div[3]/div/section/ui-view/section/form/div/div[2]/div/p[1]", 5.1)
+        driver.find_element(
+            By.XPATH, "/html/body/div[3]/div/section/ui-view/section/form/div/div[2]/div/p[1]").click()
+        self.exists_by_xpath(
+            driver, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-create-otp/isp-feature-container/section/isp-ngb-accordion/div/div[2]/isp-personal-information/isp-primary-email/isp-dynamic-form/form/div/div[1]/div/isp-dynamic-form-control/div/isp-input-switcher/div/isp-input-double-entry/isp-input-generic[1]/div/div/div[2]/div/input", 4.5)
+        driver.find_element(
+            By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-create-otp/isp-feature-container/section/isp-ngb-accordion/div/div[2]/isp-personal-information/isp-primary-email/isp-dynamic-form/form/div/div[1]/div/isp-dynamic-form-control/div/isp-input-switcher/div/isp-input-double-entry/isp-input-generic[1]/div/div/div[2]/div/input").send_keys(config('POWER_USER_NAME'))
+        driver.find_element(
+            By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-create-otp/isp-feature-container/section/isp-ngb-accordion/div/div[2]/isp-personal-information/isp-primary-email/isp-dynamic-form/form/div/div[1]/div/isp-dynamic-form-control/div/isp-input-switcher/div/isp-input-double-entry/isp-input-generic[2]/div/div/div[2]/div/input").send_keys(config('POWER_USER_NAME'))
+
+        driver.find_element(
+            By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-create-otp/isp-feature-container/section/isp-ngb-accordion/div/div[2]/isp-personal-information/isp-phones/isp-dynamic-form/form/div/div[1]/div[2]/isp-phone-type/isp-dynamic-form-control/div/isp-select-switcher/div/isp-select-generic/div/div[1]/isp-dropdown/div/button/span").click()
+        time.sleep(5)
+        driver.find_element(
+            By.XPATH, "//*[@id=\"personalInfo\"]/isp-personal-information/isp-phones/isp-dynamic-form/form/div/div[1]/div[2]/isp-phone-type/isp-dynamic-form-control/div/isp-select-switcher/div/isp-select-generic/div/div[1]/isp-dropdown/div/ul/li[1]").click()
+
+        time.sleep(2.4)
+
+        driver.find_element(
+            By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-create-otp/isp-feature-container/section/isp-ngb-accordion/div/div[2]/isp-personal-information/isp-section-nav-buttons/div/div[2]/div[2]/div/button").click()
+
+        time.sleep(5.1)
+
+        driver.find_element(
+            By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-create-otp/isp-feature-container/section/isp-ngb-accordion/div/div[3]/isp-payment-method/isp-wallet/isp-section-nav-buttons/div/div[2]/div[2]/div/button").click()
+        time.sleep(2.4)
+        driver.find_element(
+            By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-create-otp/isp-feature-container/section/isp-ngb-accordion/div/div[4]/isp-payment-information/div/form/isp-payment-info-form[4]/div/div[1]/isp-section-nav-buttons/div/div/div[2]/div/button").click()
+        driver.find_element(
+            By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-authorize-payment/div/div/div/isp-content-feature-box/div/div/div/div/div[3]/div/isp-terms-conditions/div/div/div/div[1]/label").click()
+        time.sleep(2.4)
+        driver.find_element(
+            By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-authorize-payment/div/div/div/isp-content-feature-box/div/div/div/div/div[4]/div/div[1]/div[2]/button").click()
+        time.sleep(30)
 
     # Internet Bill Helpers
 
@@ -158,6 +197,33 @@ class Helper:
 
     def pay_internet_bill(self, driver):
         print("Paying the Internet Bill...")
+        self.exists_by_xpath(
+            driver, "/html/body/div[1]/div/div[2]/div[2]/div/div[7]/div/div[1]/button[1]", 3.4)
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div[7]/div/div[1]/button[1]").click()
+        time.sleep(3.4)
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div[5]/div/div[3]/div/nav/div/label[1]/div/span/span[2]").click()
+        time.sleep(1.3)
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/span").click()
+
+        # enter card info
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[1]/div/input").send_keys(config('CARD_NUMBER'))
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[1]/div/input").send_keys(config('CARD_EXP_DATE'))
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[2]/div/input").send_keys(config('CARD_CID'))
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[3]/div/div/input").send_keys(config('ADDR_ZIP'))
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[2]/button").click()
+
+        # pay
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[5]/div/div[3]/div[2]/button").click()
+        time.sleep(30)
 
     # Twilio calls
 

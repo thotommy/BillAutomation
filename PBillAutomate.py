@@ -13,14 +13,16 @@ if __name__ == '__main__':
     h = Helper()
 
     # Water Bill Automation ======================================================
-    h.check_water_bill_prices(driver)
-    h.pay_water_bill(driver)
+    # h.check_water_bill_prices(driver)
+    # h.pay_water_bill(driver)
 
     # Electric Bill Automation ===================================================
     # h.check_electric_bill_prices(driver)
+    # h.pay_electric_bill(driver)
 
     # Internet Bill Automation ===================================================
     # h.check_internet_bill_prices(driver)
+    # h.pay_internet_bill(driver)
 
     # h.send_message()
 
