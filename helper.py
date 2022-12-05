@@ -9,6 +9,9 @@ from decouple import config
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+
+
 from twilio.rest import Client
 
 
@@ -22,7 +25,8 @@ class Helper:
     # Water Bill Helpers
 
     def check_accountExists_And_Requires_Payment(self, driver):
-        acct = driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[3]/div/div[2]/div/div/table/tbody/tr/td[1]").text
+        acct = driver.find_element(
+            By.XPATH, "/html/body/div[2]/div[2]/div[3]/div/div[2]/div/div/table/tbody/tr/td[1]").text
         self.__water_bill = driver.find_element(By.XPATH,
                                                 "/html/body/div[2]/div[2]/div[3]/div/div[2]/div/div/table/tbody/tr/td[4]").text
         if (acct == config('SHORT_VERS_ADDR') and self.__water_bill != "0.00"):
@@ -52,16 +56,23 @@ class Helper:
         print("Paying the Water Bill...")
         driver.find_element(
             By.XPATH, "/html/body/div[2]/div[2]/div[3]/div/div[2]/div/div/table/tbody/tr/td[5]/a").click()
-            
-        self.exists_by_id(driver, "ccnumfield", 4.4)
-
+        time.sleep(3.4)
+        iframe = driver.find_element(By.XPATH,
+                                     "/html/body/div[2]/div[2]/div/div/div[2]/form/div/div[3]/div[1]/section/fieldset[2]/ol/li/ol/li[1]/iframe")
+        driver.switch_to.frame(iframe)
+        self.exists_by_id(driver, "ccnumfield", 2.4)
         driver.find_element(By.ID, "ccnumfield").send_keys(
             config('CARD_NUMBER'))
-        driver.find_element(By.ID, "ccexpirymonth").send_keys(
-            config('CARD_EXP_DATE_MONTH'))
-        driver.find_element(By.ID, "ccexpiryyear").send_keys(
-            config('CARD_EXP_DATE_YEAR'))
+        time.sleep(3.4)
+        drop = Select(driver.find_element(By.ID, "ccexpirymonth"))
+        drop.select_by_visible_text(config('CARD_EXP_DATE_MONTH'))
+        time.sleep(3.4)
+        drop2 = Select(driver.find_element(By.ID, "ccexpiryyear"))
+        drop2.select_by_visible_text(config('CARD_EXP_DATE_YEAR'))
+        time.sleep(3.4)
         driver.find_element(By.ID, "cccvvfield").send_keys(config('CARD_CID'))
+        time.sleep(3.4)
+        driver.switch_to.parent_frame()
         driver.find_element(By.ID, "txtNameOnCard").send_keys(
             config('PERSON_NAME'))
         driver.find_element(By.ID, "txtAddress").send_keys(
@@ -72,8 +83,13 @@ class Helper:
         driver.find_element(By.ID, "txtZipPostal").send_keys(
             config('ADDR_ZIP'))
         driver.find_element(By.ID, "emlEmail").send_keys(config('USER_NAME'))
-        time.sleep(2.4)
+        time.sleep(3.4)
         driver.find_element(By.ID, "btnContinuePaymentCsi").click()
+        time.sleep(5.4)
+        # click pay
+        driver.find_element(
+            By.XPATH, "/html/body/div[2]/div[2]/div/div/div[2]/form/div/div[3]/div[2]/p[1]/input").click()
+        time.sleep(30.0)
     # Eletric Bill Helpers
 
     def check_electric_bill_prices(self, driver):
