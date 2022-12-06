@@ -151,6 +151,7 @@ class Helper:
         time.sleep(2.4)
         driver.find_element(
             By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-create-otp/isp-feature-container/section/isp-ngb-accordion/div/div[4]/isp-payment-information/div/form/isp-payment-info-form[4]/div/div[1]/isp-section-nav-buttons/div/div/div[2]/div/button").click()
+        time.sleep(2.4)
         driver.find_element(
             By.XPATH, "/html/body/isp-app-main/div/isp-feature-layout/div[1]/div[1]/div/div/div/isp-otp/isp-authorize-payment/div/div/div/isp-content-feature-box/div/div/div/div/div[3]/div/isp-terms-conditions/div/div/div/div[1]/label").click()
         time.sleep(2.4)
@@ -201,28 +202,21 @@ class Helper:
             driver, "/html/body/div[1]/div/div[2]/div[2]/div/div[7]/div/div[1]/button[1]", 3.4)
         driver.find_element(
             By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div[7]/div/div[1]/button[1]").click()
-        time.sleep(3.4)
-        driver.find_element(
-            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div[5]/div/div[3]/div/nav/div/label[1]/div/span/span[2]").click()
+        time.sleep(4.4)
+        # choose payment method
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div[5]/div/div[3]/div/nav/div/label[1]/div/span/span[1]").click()
         time.sleep(1.3)
-        driver.find_element(
-            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/span").click()
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/span").click()
 
         # enter card info
-        driver.find_element(
-            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[1]/div/input").send_keys(config('CARD_NUMBER'))
-        driver.find_element(
-            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[1]/div/input").send_keys(config('CARD_EXP_DATE'))
-        driver.find_element(
-            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[2]/div/input").send_keys(config('CARD_CID'))
-        driver.find_element(
-            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[3]/div/div/input").send_keys(config('ADDR_ZIP'))
-        driver.find_element(
-            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[2]/button").click()
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[1]/div/input").send_keys(config('CARD_NUMBER'))
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[1]/div/input").send_keys(config('CARD_EXP_DATE'))
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[2]/div/input").send_keys(config('CARD_CID'))
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[3]/div/div/input").send_keys(config('ADDR_ZIP'))
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[2]/button").click()
 
         # pay
-        driver.find_element(
-            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[5]/div/div[3]/div[2]/button").click()
+        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[5]/div/div[3]/div[2]/button").click()
         time.sleep(30)
 
     # Twilio calls
