@@ -10,6 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+import requests
 
 
 from twilio.rest import Client
@@ -221,14 +222,46 @@ class Helper:
 
     # Twilio calls
 
-    def send_message(self):
+    def send_bill_message(self, driver):
         msg = f"Water Bill: ${self.__water_bill} \nElectric Bill: {self.__electric_bill} \nInternet Bill: ${self.__internet_bill}\nType yes to pay no to not pay."
         client = Client(config('TWILIO_ACCT_SID'), config('TWILIO_AUTH_TOKEN'))
         client.messages.create(
             to=config('USER_NUMBER'),
             from_=config('TWILIO_PHONE_NUMBER'),
             body=msg)
+
+        # Wait an hour for a response in the message if no response or a no response just close driver.
+        time.sleep(3600)
+        resp = requests.GET(f"{config('BASE_URL')}/getResp");
+        print(resp.json())
+
+        if(resp.json() == "yes"):
+            self.pay_bills(driver)
+            self.send_pay_bill_confirmation()
+        else:
+            self._close_driver(driver);
+            
+
+    def send_pay_bill_confirmation(self):
+        msg = "The Water, Electric, and Internet bill has been paid."
+        client = Client(config('TWILIO_ACCT_SID'), config('TWILIO_AUTH_TOKEN'))
+        client.messages.create(
+            to=config('USER_NUMBER'),
+            from_=config('TWILIO_PHONE_NUMBER'),
+            body=msg)
+
     # Common Helpers
+
+    def pay_bills(self, driver):
+        self.check_water_bill_prices(driver)
+        self.pay_water_bill(driver)
+
+        self.check_electric_bill_prices(driver)
+        self.pay_electric_bill(driver)
+
+        self.check_internet_bill_prices(driver)
+        self.pay_internet_bill(driver)
+        self.send_pay_bill_confirmation()
 
     def exists_by_id(self, driver, id, seconds):
         while (self.__check_exists_by_id(driver, id) == False):
@@ -256,6 +289,6 @@ class Helper:
 
     def _close_driver(self, driver):
         print("Closing driver...")
-        # driver.close()
-        # driver.quit()
-        # quit()
+        driver.close()
+        driver.quit()
+        quit()
