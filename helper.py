@@ -205,19 +205,27 @@ class Helper:
             By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div[7]/div/div[1]/button[1]").click()
         time.sleep(4.4)
         # choose payment method
-        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div[5]/div/div[3]/div/nav/div/label[1]/div/span/span[1]").click()
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div[5]/div/div[3]/div/nav/div/label[1]/div").click()
         time.sleep(1.3)
-        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/span").click()
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/span").click()
 
         # enter card info
-        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[1]/div/input").send_keys(config('CARD_NUMBER'))
-        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[1]/div/input").send_keys(config('CARD_EXP_DATE'))
-        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[2]/div/input").send_keys(config('CARD_CID'))
-        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[3]/div/div/input").send_keys(config('ADDR_ZIP'))
-        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[2]/button").click()
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[1]/div/input").send_keys(config('CARD_NUMBER'))
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[1]/div/input").send_keys(config('CARD_EXP_DATE'))
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[2]/div[2]/div/input").send_keys(config('CARD_CID'))
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[1]/div/div[3]/div/div/input").send_keys(config('ADDR_ZIP'))
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/div/div/div/div/div[2]/button").click()
 
         # pay
-        driver.find_element(By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[5]/div/div[3]/div[2]/button").click()
+        driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[5]/div/div[3]/div[2]/button").click()
         time.sleep(30)
 
     # Twilio calls
@@ -232,15 +240,14 @@ class Helper:
 
         # Wait an hour for a response in the message if no response or a no response just close driver.
         time.sleep(3600)
-        resp = requests.GET(f"{config('BASE_URL')}/getResp");
+        resp = requests.GET(f"{config('BASE_URL')}/getResp")
         print(resp.json())
 
-        if(resp.json() == "yes"):
+        if (resp.json() == "yes"):
             self.pay_bills(driver)
             self.send_pay_bill_confirmation()
         else:
-            self._close_driver(driver);
-            
+            self._close_driver(driver)
 
     def send_pay_bill_confirmation(self):
         msg = "The Water, Electric, and Internet bill has been paid."
