@@ -1,5 +1,5 @@
 # Specify the base image
-FROM python:3.8-alpine
+FROM python:3.10-alpine
 
 # Create a directory for the app
 RUN mkdir /app
@@ -9,12 +9,14 @@ WORKDIR /app
 
 # Copy the app files into the directory
 COPY . /app
-COPY ../requirements.txt /app
 
 # Install the necessary dependencies from the requirements.txt file
 RUN pip install -r requirements.txt
 
+# EXPOSE 5000
+EXPOSE 5000
+
 # Specify the command to run the app
 ENTRYPOINT [ "python" ]
 
-CMD ["RecieveMsgServer.py" ]
+CMD ["ReceiveMsgServer.py" ]
