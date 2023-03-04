@@ -199,14 +199,19 @@ class Helper:
 
     def pay_internet_bill(self, driver):
         print("Paying the Internet Bill...")
+        # Click Make a Payment
         self.exists_by_xpath(
             driver, "/html/body/div[1]/div/div[2]/div[2]/div/div[7]/div/div[1]/button[1]", 3.4)
         driver.find_element(
             By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div[7]/div/div[1]/button[1]").click()
-        time.sleep(4.4)
+        time.sleep(6.4)
+
+        self.exists_by_xpath(
+            driver, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div[5]/div/div[3]/div/nav/div/label[1]/div", 3.4)
         # choose payment method
         driver.find_element(
             By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div[5]/div/div[3]/div/nav/div/label[1]/div").click()
+        
         time.sleep(1.3)
         driver.find_element(
             By.XPATH, "/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div[1]/label/span").click()
@@ -260,11 +265,11 @@ class Helper:
     # Common Helpers
 
     def pay_bills(self, driver):
-        self.check_water_bill_prices(driver)
-        self.pay_water_bill(driver)
+        # self.check_water_bill_prices(driver)
+        # self.pay_water_bill(driver)
 
-        self.check_electric_bill_prices(driver)
-        self.pay_electric_bill(driver)
+        # self.check_electric_bill_prices(driver)
+        # self.pay_electric_bill(driver)
 
         self.check_internet_bill_prices(driver)
         self.pay_internet_bill(driver)
